@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_welcome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/start_background">
+
+    <ImageView
+        android:id="@+id/iv_welcome_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/app_icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_welcome_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="硅谷金融"
+        android:textColor="@color/white"
+        android:textSize="40sp" />
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="@style/mProgress_circle"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:indeterminateDuration="1200"
+        android:layout_above="@+id/ll_text"
+        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content"
+        android:visibility="visible"/>
+    <!--<ProgressBar-->
+        <!--android:id="@+id/my_progress"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_marginLeft="30dp"-->
+        <!--android:layout_marginRight="30dp"-->
+        <!--android:layout_height="12dp"-->
+        <!--android:max="100"-->
+        <!--android:progress="0"-->
+        <!--android:indeterminateDuration="1200"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_above="@+id/tv_load"-->
+        <!--style="?android:attr/progressBarStyleHorizontal"-->
+        <!--android:progressDrawable="@drawable/progressbar_color"/>-->
+    <TextView
+        android:id="@+id/tv_load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="135dp"
+        android:text="正在加载..."
+        android:textColor="#aa000000"
+        android:layout_above="@+id/ll_text"/>
+    <LinearLayout
+        android:id="@+id/ll_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前版本:"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_welcome_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.1"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
