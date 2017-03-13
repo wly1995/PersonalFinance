@@ -1,24 +1,25 @@
 package com.atguigu.giugufinance.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.atguigu.giugufinance.R;
 
 /**
  * Created by 万里洋 on 2017/3/10.
  */
 
-public class HomeFragement extends Fragment {
+public class HomeFragement extends BaseFragment {
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = View.inflate(getActivity(), R.layout.fragment_home,null);
-        return view;
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    public int getLayoutid() {
+        return R.layout.fragment_home;
     }
 }
