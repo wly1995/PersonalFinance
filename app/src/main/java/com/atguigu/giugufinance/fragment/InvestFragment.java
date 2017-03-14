@@ -96,13 +96,16 @@ public class InvestFragment extends BaseFragment {
         switch (i){
             case 0:
                 //改变当前的背景色
-                tvInvestAll.setBackgroundColor(Color.BLUE);
+                tvInvestAll.setBackgroundColor(Color.RED);
+                tvInvestAll.setTextColor(Color.BLACK);
                 break;
             case 1:
-                tvInvestRecommend.setBackgroundColor(Color.BLUE);
+                tvInvestRecommend.setBackgroundColor(Color.RED);
+                tvInvestRecommend.setTextColor(Color.BLACK);
                 break;
             case 2:
-                tvInvestHot.setBackgroundColor(Color.BLUE);
+                tvInvestHot.setBackgroundColor(Color.RED);
+                tvInvestHot.setTextColor(Color.BLACK);
                 break;
         }
     }

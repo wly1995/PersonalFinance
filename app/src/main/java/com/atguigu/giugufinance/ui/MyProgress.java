@@ -54,7 +54,7 @@ public class MyProgress extends View{
     private int measuredHeight;
     private int measuredWidth;
     //圆环宽
-    private int roundWidth = 10;
+    private int roundWidth = 6;
 
 
     //这个构造器是在代码中创建时用到
@@ -72,8 +72,8 @@ public class MyProgress extends View{
         //自定义属性
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.progress);
         //第一个参数获取attrs里面的配置属性名，第二个参数设置默认值，如果说在xml中没有给这个属性的初值，则它取得就是默认值
-        roundColor = typedArray.getColor(R.styleable.progress_roundColor, Color.GRAY);
-        sweepColor  = typedArray.getColor(R.styleable.progress_sweepColor,Color.RED);
+        roundColor = typedArray.getColor(R.styleable.progress_roundColor, Color.parseColor("#1bb3d7"));
+        sweepColor  = typedArray.getColor(R.styleable.progress_sweepColor,Color.parseColor("#fbba30"));
         sweepArc = typedArray.getInteger(R.styleable.progress_sweepArc,0);
         //关闭资源
         typedArray.recycle();
