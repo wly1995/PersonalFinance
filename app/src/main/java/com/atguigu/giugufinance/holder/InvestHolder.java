@@ -40,5 +40,10 @@ public class InvestHolder extends BaseHolder<InvestAllBean.DataBean> {
         InvestAllBean.DataBean dataBean = getT();
         pName.setText(dataBean.getName());
         pMoney.setText(dataBean.getMoney());
+        pProgresss.setProgress(Integer.parseInt(dataBean.getProgress()));
+        pSuodingdays.setText(dataBean.getSuodingDays());
+        pYearlv.setText(dataBean.getYearRate());
+        pMinnum.setText(dataBean.getMinTouMoney());
+        pMinzouzi.setText(dataBean.getMemberNum());
     }
 }
