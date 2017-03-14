@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.atguigu.giugufinance.R;
+import com.atguigu.giugufinance.util.AppManager;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -109,6 +110,6 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        AppManager.getInstance().remove(this);//删除这个activity
     }
 }

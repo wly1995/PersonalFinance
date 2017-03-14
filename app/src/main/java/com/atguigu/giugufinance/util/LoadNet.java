@@ -28,7 +28,6 @@ public class LoadNet{
                 if (http != null) {
                     http.failure(content);
                 }
-
             }
         });
     }

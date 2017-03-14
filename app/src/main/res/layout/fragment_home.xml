@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:atguigu="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:wly="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <include layout="@layout/base_head"></include>
 
-    <ScrollView
+    <com.atguigu.giugufinance.ui.NewScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -21,10 +21,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp">
 
-                <!--<com.youth.banner.Banner-->
-                    <!--android:id="@+id/banner"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent" />-->
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
                 <!--<android.support.v4.view.ViewPager
                     android:id="@+id/vp_home"
@@ -98,19 +98,12 @@
             </LinearLayout>
 
 
-            <!--<com.atguigu.p2pinvest0828.ui.RoundProgress-->
-                <!--android:id="@+id/roundPro_home"-->
-                <!--android:layout_width="120dp"-->
-                <!--android:layout_height="120dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--atguigu:roundColor="@color/more_text"-->
-                <!--atguigu:roundProgressColor="@color/round_red_common"-->
-                <!--atguigu:textColor="@color/title_back"-->
-                <!--atguigu:textSize="20dp"-->
-                <!--atguigu:roundWith="10dp"-->
-                <!--atguigu:max="100"-->
-                <!--atguigu:progress="70"-->
-                <!--/>-->
+            <com.atguigu.giugufinance.ui.MyProgress
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:id="@+id/home_progress"
+                 />
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -164,6 +157,6 @@
         </LinearLayout>
 
 
-    </ScrollView>
+    </com.atguigu.giugufinance.ui.NewScrollView>
 
 </LinearLayout>
