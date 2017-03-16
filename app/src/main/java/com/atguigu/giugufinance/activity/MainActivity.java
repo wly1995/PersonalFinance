@@ -1,8 +1,6 @@
 package com.atguigu.giugufinance.activity;
 
-import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -13,9 +11,8 @@ import com.atguigu.giugufinance.fragment.MoreFragment;
 import com.atguigu.giugufinance.fragment.ProperyFragment;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
 
     @Bind(R.id.rg_main)
@@ -24,24 +21,22 @@ public class MainActivity extends AppCompatActivity {
     private InvestFragment investFragment;
     private ProperyFragment properyFragment;
     private MoreFragment moreFragment;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-//        initData();
-//        initListener();
-        initData();
-        initListener();
-    }
-
-    private void initData() {
+    public void initData() {
         //默认的数据
         switchFragment(R.id.rb_home);
     }
 
-    private void initListener() {
+    @Override
+    protected void initTitle() {
+
+    }
+
+    @Override
+    public int getLayoutid() {
+        return R.layout.activity_main;
+    }
+
+    public void initListener() {
 
         rgMain.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

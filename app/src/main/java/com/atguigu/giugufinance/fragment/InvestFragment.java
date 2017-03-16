@@ -97,15 +97,12 @@ public class InvestFragment extends BaseFragment {
             case 0:
                 //改变当前的背景色
                 tvInvestAll.setBackgroundColor(Color.RED);
-                tvInvestAll.setTextColor(Color.BLACK);
                 break;
             case 1:
                 tvInvestRecommend.setBackgroundColor(Color.RED);
-                tvInvestRecommend.setTextColor(Color.BLACK);
                 break;
             case 2:
                 tvInvestHot.setBackgroundColor(Color.RED);
-                tvInvestHot.setTextColor(Color.BLACK);
                 break;
         }
     }
@@ -117,6 +114,9 @@ public class InvestFragment extends BaseFragment {
         tvInvestRecommend.setBackgroundColor(Color.WHITE);
         tvInvestHot.setBackgroundColor(Color.WHITE);
         tvInvestAll.setBackgroundColor(Color.WHITE);
+        tvInvestAll.setTextColor(Color.BLACK);
+        tvInvestRecommend.setTextColor(Color.BLACK);
+        tvInvestHot.setTextColor(Color.BLACK);
     }
 
     private void initViewPager() {

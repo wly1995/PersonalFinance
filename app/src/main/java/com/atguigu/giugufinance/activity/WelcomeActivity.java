@@ -3,10 +3,8 @@ package com.atguigu.giugufinance.activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ProgressBar;
@@ -17,9 +15,8 @@ import com.atguigu.giugufinance.R;
 import com.atguigu.giugufinance.util.AppManager;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends BaseActivity {
 
     @Bind(R.id.progressBar2)
     ProgressBar progressBar2;
@@ -31,21 +28,27 @@ public class WelcomeActivity extends AppCompatActivity {
     RelativeLayout rlWelcome;
     //    @Bind(R.id.my_progress)
 //    ProgressBar myProgress;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
-        ButterKnife.bind(this);
-        initData();
+    protected void initListener() {
 
     }
 
-    private void initData() {
+    public void initData() {
+        AppManager.getInstance().addActivity(this);
         //设置版本号
         setVersion();
         //设置渐变动画
         setAnimation();
+    }
+
+    @Override
+    protected void initTitle() {
+
+    }
+
+    @Override
+    public int getLayoutid() {
+        return R.layout.activity_welcome;
     }
 
     private void setAnimation() {
@@ -60,9 +63,15 @@ public class WelcomeActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                startMainActivity();
-                progressBar2.setVisibility(View.GONE);
-                tvLoad.setText("加载完成");
+                if (isLogin()){
+                    //登录过进入主界面
+                    startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
+                    finish();
+                }else{
+                    //没有登录过进入登录界面
+                    startActivity(new Intent(WelcomeActivity.this,LoginActivity.class));
+                    finish();
+                }
             }
 
             @Override
@@ -70,6 +79,14 @@ public class WelcomeActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private boolean isLogin() {
+        String name = getUser().getData().getName();
+        if (TextUtils.isEmpty(name)){
+            return false;
+        }
+        return true;
     }
 
     private void setVersion() {
