@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.atguigu.giugufinance.R;
 import com.atguigu.giugufinance.activity.ColumnActivity;
+import com.atguigu.giugufinance.activity.ImageSettingActivity;
 import com.atguigu.giugufinance.activity.LineChartActivity;
 import com.atguigu.giugufinance.activity.MainActivity;
 import com.atguigu.giugufinance.activity.PieActivity;
@@ -83,6 +84,12 @@ public class ProperyFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(),WithDrawActivity.class));
+            }
+        });
+        tvSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),ImageSettingActivity.class));
             }
         });
     }
