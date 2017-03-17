@@ -143,7 +143,7 @@ public class ReChargeActivity extends BaseActivity {
 
                 //调支付宝
                 // 订单
-                String orderInfo = getOrderInfo("测试的商品", "该测试商品的详细描述", "0.01");
+                String orderInfo = getOrderInfo("至高之拳", "瞎子大神专属皮肤", "99");
                 // 对订单做RSA 签名
                 String sign = sign(orderInfo);
                 try {
