@@ -1,12 +1,17 @@
 package com.atguigu.giugufinance.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.atguigu.giugufinance.R;
+import com.atguigu.giugufinance.activity.ColumnActivity;
+import com.atguigu.giugufinance.activity.LineChartActivity;
 import com.atguigu.giugufinance.activity.MainActivity;
+import com.atguigu.giugufinance.activity.PieActivity;
 import com.atguigu.giugufinance.bean.UserInfo;
 import com.atguigu.giugufinance.command.AppNetConfig;
 import com.squareup.picasso.Picasso;
@@ -46,7 +51,26 @@ public class ProperyFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
+        llZichan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),PieActivity.class));
+            }
+        });
 
+        llTouziZhiguan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),ColumnActivity.class));
+            }
+        });
+
+        llTouzi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),LineChartActivity.class));
+            }
+        });
     }
 
     @Override
