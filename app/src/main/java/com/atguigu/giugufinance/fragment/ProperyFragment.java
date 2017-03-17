@@ -13,6 +13,7 @@ import com.atguigu.giugufinance.activity.LineChartActivity;
 import com.atguigu.giugufinance.activity.MainActivity;
 import com.atguigu.giugufinance.activity.PieActivity;
 import com.atguigu.giugufinance.activity.ReChargeActivity;
+import com.atguigu.giugufinance.activity.WithDrawActivity;
 import com.atguigu.giugufinance.bean.UserInfo;
 import com.atguigu.giugufinance.command.AppNetConfig;
 import com.squareup.picasso.Picasso;
@@ -76,6 +77,12 @@ public class ProperyFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(),ReChargeActivity.class));
+            }
+        });
+        withdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),WithDrawActivity.class));
             }
         });
     }
