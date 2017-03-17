@@ -1,7 +1,10 @@
 package com.atguigu.giugufinance.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -17,7 +20,13 @@ import com.atguigu.giugufinance.activity.ReChargeActivity;
 import com.atguigu.giugufinance.activity.WithDrawActivity;
 import com.atguigu.giugufinance.bean.UserInfo;
 import com.atguigu.giugufinance.command.AppNetConfig;
+import com.atguigu.giugufinance.util.BitmapUtils;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import butterknife.Bind;
 import jp.wasabeef.picasso.transformations.BlurTransformation;
@@ -57,39 +66,39 @@ public class ProperyFragment extends BaseFragment {
         llZichan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),PieActivity.class));
+                startActivity(new Intent(getActivity(), PieActivity.class));
             }
         });
 
         llTouziZhiguan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),ColumnActivity.class));
+                startActivity(new Intent(getActivity(), ColumnActivity.class));
             }
         });
 
         llTouzi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),LineChartActivity.class));
+                startActivity(new Intent(getActivity(), LineChartActivity.class));
             }
         });
         recharge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),ReChargeActivity.class));
+                startActivity(new Intent(getActivity(), ReChargeActivity.class));
             }
         });
         withdraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),WithDrawActivity.class));
+                startActivity(new Intent(getActivity(), WithDrawActivity.class));
             }
         });
         tvSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),ImageSettingActivity.class));
+                startActivity(new Intent(getActivity(), ImageSettingActivity.class));
             }
         });
     }
@@ -117,13 +126,13 @@ public class ProperyFragment extends BaseFragment {
                     }
                 })
                 .into(ivMeIcon);*/
-        Picasso.with(getActivity()).load(AppNetConfig.BASE_URL+"/images/tx.png")
+        Picasso.with(getActivity()).load(AppNetConfig.BASE_URL + "/images/tx.png")
                 .transform(new CropCircleTransformation())
                 .transform(
                         new ColorFilterTransformation(Color
                                 .parseColor("#66FFccff")))
                 //第二个参数值越大越模糊
-                .transform(new BlurTransformation(getActivity(),10))
+                .transform(new BlurTransformation(getActivity(), 10))
                 .into(ivMeIcon);
     }
 
@@ -135,5 +144,51 @@ public class ProperyFragment extends BaseFragment {
     @Override
     public String getChildUrl() {
         return null;
+    }
+
+    //从新回来进行回调的方法
+    @Override
+    public void onResume() {
+        super.onResume();
+        MainActivity activity = (MainActivity) getActivity();
+        //得到是否更新过的布尔值
+        Boolean update = activity.isUpdate();
+        if (update) {
+            //如果改变过，说明设置的头像
+            File filesDir = null;
+            FileInputStream fis = null;
+            try {
+                //判断是否挂载了sd卡
+                if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                    //外部存储路径
+                    filesDir = getActivity().getExternalFilesDir("");
+                } else {
+                    filesDir = getActivity().getFilesDir(); //内部存储路径
+                }
+                //全路径
+                File path = new File(filesDir, "123.png");
+
+                if (path.exists()) {
+                    //找到存贮图片的路径开始读取
+                    fis = new FileInputStream(path);
+                    Bitmap bitmap = BitmapFactory.decodeStream(fis);
+                    //变成圆形
+                    Bitmap circleBitmap = BitmapUtils.circleBitmap(bitmap);
+                    ivMeIcon.setImageBitmap(circleBitmap);
+                    //读取完以后布尔值改成false
+                    activity.saveImage(false);
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (fis != null) {
+                        fis.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
