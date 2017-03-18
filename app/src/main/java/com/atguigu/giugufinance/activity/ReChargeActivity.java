@@ -104,6 +104,7 @@ public class ReChargeActivity extends BaseActivity {
             }
         };
     };
+    private String money = "";
 
     @Override
     protected void initListener() {
@@ -123,7 +124,7 @@ public class ReChargeActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                String money = s.toString().trim();
+                money = s.toString().trim();
                 if (TextUtils.isEmpty(money)) {
                     //设置充值不可点击
                     btnChongzhi.setClickable(false);
@@ -132,54 +133,51 @@ public class ReChargeActivity extends BaseActivity {
                 } else {
                     btnChongzhi.setClickable(true);
                     btnChongzhi.setBackgroundResource(R.drawable.btn_01);
+                    //充值的点击事件
+                    btnChongzhi.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //调支付宝
+                            // 订单
+                            String orderInfo = getOrderInfo("至高之拳", "瞎子大神专属皮肤", "99");
+                            // 对订单做RSA 签名
+                            String sign = sign(orderInfo);
+                            try {
+                                // 仅需对sign 做URL编码
+                                sign = URLEncoder.encode(sign, "UTF-8");
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+
+                            // 完整的符合支付宝参数规范的订单信息
+                            final String payInfo = orderInfo + "&sign=\"" + sign + "\"&"
+                                    + getSignType();
+
+                            Runnable payRunnable = new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    // 构造PayTask 对象
+                                    PayTask alipay = new PayTask(ReChargeActivity.this);
+                                    // 调用支付接口，获取支付结果
+                                    String result = alipay.pay(payInfo);
+
+                                    Message msg = new Message();
+                                    msg.what = SDK_PAY_FLAG;
+                                    msg.obj = result;
+                                    mHandler.sendMessage(msg);
+                                }
+                            };
+
+                            // 必须异步调用
+                            Thread payThread = new Thread(payRunnable);
+                            payThread.start();
+
+                        }
+                    });
                 }
             }
         });
-
-        //充值的点击事件
-        btnChongzhi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //调支付宝
-                // 订单
-                String orderInfo = getOrderInfo("至高之拳", "瞎子大神专属皮肤", "99");
-                // 对订单做RSA 签名
-                String sign = sign(orderInfo);
-                try {
-                    // 仅需对sign 做URL编码
-                    sign = URLEncoder.encode(sign, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-
-                // 完整的符合支付宝参数规范的订单信息
-                final String payInfo = orderInfo + "&sign=\"" + sign + "\"&"
-                        + getSignType();
-
-                Runnable payRunnable = new Runnable() {
-
-                    @Override
-                    public void run() {
-                        // 构造PayTask 对象
-                        PayTask alipay = new PayTask(ReChargeActivity.this);
-                        // 调用支付接口，获取支付结果
-                        String result = alipay.pay(payInfo);
-
-                        Message msg = new Message();
-                        msg.what = SDK_PAY_FLAG;
-                        msg.obj = result;
-                        mHandler.sendMessage(msg);
-                    }
-                };
-
-                // 必须异步调用
-                Thread payThread = new Thread(payRunnable);
-                payThread.start();
-
-            }
-        });
-
     }
 
     @Override
@@ -189,7 +187,14 @@ public class ReChargeActivity extends BaseActivity {
 
     @Override
     protected void initTitle() {
-
+        baseBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        baseSetting.setVisibility(View.GONE);
+        baseTitle.setText(btnChongzhi.getText());
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -32,6 +33,8 @@ import butterknife.Bind;
 import jp.wasabeef.picasso.transformations.BlurTransformation;
 import jp.wasabeef.picasso.transformations.ColorFilterTransformation;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by 万里洋 on 2017/3/10.
@@ -167,7 +170,7 @@ public class ProperyFragment extends BaseFragment {
                 }
                 //全路径
                 File path = new File(filesDir, "123.png");
-
+                Log.e(TAG, "onResume: "+path.toString() );
                 if (path.exists()) {
                     //找到存贮图片的路径开始读取
                     fis = new FileInputStream(path);

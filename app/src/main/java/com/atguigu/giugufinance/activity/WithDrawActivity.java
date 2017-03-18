@@ -1,5 +1,8 @@
 package com.atguigu.giugufinance.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -63,18 +66,23 @@ public class WithDrawActivity extends BaseActivity {
                 }else{
                     btnTixian.setClickable(true);
                     btnTixian.setBackgroundResource(R.drawable.btn_01);
+                    btnTixian.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            SharedPreferences sp = getSharedPreferences("tog_state", Context.MODE_PRIVATE);
+                            boolean isOpen = sp.getBoolean("isOpen", false);
+                            if (isOpen){//打开的状态
+                                startActivity(new Intent(WithDrawActivity.this,
+                                        GestureVerifyActivity.class));
+                            }else{
+                                Toast.makeText(WithDrawActivity.this, "提现申请成功", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
             }
         });
-
-        btnTixian.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(WithDrawActivity.this, "提现申请成功", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
-
     @Override
     protected void initData() {
 
